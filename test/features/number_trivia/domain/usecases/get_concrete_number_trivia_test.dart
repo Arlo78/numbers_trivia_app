@@ -20,7 +20,7 @@ void main() {
     when(() => mockNumberTriviaRepository.getConcreteNumberTrivia(number))
         .thenAnswer((_) async => const Right(numberTrivia));
 
-    final result = await usecase.execute(number: number);
+    final result = await usecase(number: number);
 
     expect(result, const Right(numberTrivia));
     verify(() => mockNumberTriviaRepository.getConcreteNumberTrivia(number));
