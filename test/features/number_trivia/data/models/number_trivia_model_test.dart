@@ -30,4 +30,17 @@ void main() {
       expect(result, numberTriviaModel);
     });
   });
+
+  group('toJson', () {
+    test('should return a JSON map containing the proper data', () async {
+      final result = numberTriviaModel.toJson();
+
+      final expectedMap = {
+        "text": "test",
+        "number": 1.0,
+      };
+
+      expect(result, expectedMap);
+    });
+  });
 }
