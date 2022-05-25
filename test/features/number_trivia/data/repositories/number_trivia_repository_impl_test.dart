@@ -22,17 +22,6 @@ void main() {
   MockLocalDataSource mockLocalDataSource;
   MockNetworkInfo mockNetworkInfo;
 
-  group('getConcreteNumberTrivia', () {
-    mockRemoteDataSource = MockRemoteDataSource();
-    mockLocalDataSource = MockLocalDataSource();
-    mockNetworkInfo = MockNetworkInfo();
-    repository = NumberTriviaRepositoryImpl(
-      remoteDataSource: mockRemoteDataSource,
-      localDataSource: mockLocalDataSource,
-      networkInfo: mockNetworkInfo,
-    );
-  });
-
   group('device is online', () {
     const number = 1;
     const numberTriviaModel = NumberTriviaModel(number: number, text: 'test trivia');
