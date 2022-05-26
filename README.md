@@ -6,5 +6,6 @@ Numbers Trivia Flutter App
 
 The main purpose is to follow the TDD Clean Architecture principles based from this [repository](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course).
 
-API concrete number trivia [link](http://numbersapi.com/42?json)
-API random number trivia [link](http://numbersapi.com/random/trivia?json)
+API concrete number trivia [link](http://numbersapi.com/42?json).
+
+API random number trivia [link](http://numbersapi.com/random/trivia?json).
