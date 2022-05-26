@@ -14,17 +14,17 @@ void main() {
     networkInfoImpl = NetworkInfoImpl(mockInternetConnectionChecker);
 
     test(
-      'should forward the call to DataConnectionChecker.hasConnection',
+      'should forward the call to InternetConnectionChecker.hasConnection',
       () async {
-        final tHasConnectionFuture = Future.value(true);
+        final hasConnectionFuture = Future.value(true);
 
         when(() => mockInternetConnectionChecker.hasConnection)
-            .thenAnswer((_) => tHasConnectionFuture);
+            .thenAnswer((_) => hasConnectionFuture);
 
         final result = networkInfoImpl.isConnected;
 
         verify(() => mockInternetConnectionChecker.hasConnection);
-        expect(result, tHasConnectionFuture);
+        expect(result, hasConnectionFuture);
       },
     );
   });
