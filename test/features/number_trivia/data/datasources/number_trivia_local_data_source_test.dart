@@ -35,11 +35,29 @@ void main() {
     test('should throw CacheException when there is not a cached value', () async {
       when(() => mockSharedPreferences.getString(any())).thenReturn(null);
 
-      //verify(() => mockSharedPreferences.getString('CACHED_NUMBER_TRIVIA'));
       expect(
         () => numberTriviaLocalDataSourceImpl.getLastNumberTrivia(),
         throwsA(isA<CacheException>()),
       );
     });
+  });
+
+  group('cacheNumberTrivia', () {
+    const numberTriviaModel = NumberTriviaModel(number: 1, text: 'test trivia');
+    mockSharedPreferences = MockSharedPreferences();
+    numberTriviaLocalDataSourceImpl = NumberTriviaLocalDataSourceImpl(
+      sharedPreferences: mockSharedPreferences,
+    );
+
+    test(
+      'should call SharedPreferences to cache the data',
+      () async {
+        numberTriviaLocalDataSourceImpl.cacheNumberTrivia(numberTriviaModel);
+
+        final expectedJsonString = json.encode(numberTriviaModel.toJson());
+        print(expectedJsonString);
+        verify(() => mockSharedPreferences.setString(cachedNumberTrivia, expectedJsonString));
+      },
+    );
   });
 }
