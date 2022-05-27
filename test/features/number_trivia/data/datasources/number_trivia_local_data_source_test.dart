@@ -52,10 +52,11 @@ void main() {
     test(
       'should call SharedPreferences to cache the data',
       () async {
+        final expectedJsonString = json.encode(numberTriviaModel.toJson());
+        when(() => mockSharedPreferences.setString(cachedNumberTrivia, expectedJsonString))
+            .thenAnswer((_) => Future.value(true));
         numberTriviaLocalDataSourceImpl.cacheNumberTrivia(numberTriviaModel);
 
-        final expectedJsonString = json.encode(numberTriviaModel.toJson());
-        print(expectedJsonString);
         verify(() => mockSharedPreferences.setString(cachedNumberTrivia, expectedJsonString));
       },
     );
