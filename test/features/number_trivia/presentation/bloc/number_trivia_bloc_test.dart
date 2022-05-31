@@ -49,6 +49,14 @@ void main() {
     blocTest<NumberTriviaBloc, NumberTriviaState>(
         'should call the InputConverter to validate and convert the string to an unsigned integer',
         build: () {
+          mockGetConcreteNumberTrivia = MockGetConcreteNumberTrivia();
+          mockGetRandomNumberTrivia = MockGetRandomNumberTrivia();
+          mockInputConverter = MockInputConverter();
+          numberTriviaBloc = NumberTriviaBloc(
+            concrete: mockGetConcreteNumberTrivia,
+            random: mockGetRandomNumberTrivia,
+            inputConverter: mockInputConverter,
+          );
           when(() => mockInputConverter.stringToUnsignedInteger(numberString))
               .thenReturn(const Right(numberParse));
           return numberTriviaBloc;
@@ -61,6 +69,14 @@ void main() {
 
     blocTest<NumberTriviaBloc, NumberTriviaState>('should emit [Error] when the input is invalid',
         build: () {
+          mockGetConcreteNumberTrivia = MockGetConcreteNumberTrivia();
+          mockGetRandomNumberTrivia = MockGetRandomNumberTrivia();
+          mockInputConverter = MockInputConverter();
+          numberTriviaBloc = NumberTriviaBloc(
+            concrete: mockGetConcreteNumberTrivia,
+            random: mockGetRandomNumberTrivia,
+            inputConverter: mockInputConverter,
+          );
           when(() => mockInputConverter.stringToUnsignedInteger(numberString))
               .thenReturn(Left(InvalidInputFailure()));
           return numberTriviaBloc;
