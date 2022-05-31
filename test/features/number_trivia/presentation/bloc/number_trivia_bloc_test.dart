@@ -65,6 +65,8 @@ void main() {
           );
           when(() => mockInputConverter.stringToUnsignedInteger(numberString))
               .thenReturn(const Right(numberParse));
+          when(() => mockGetConcreteNumberTrivia(any()))
+              .thenAnswer((_) async => const Right(numberTrivia));
           return numberTriviaBloc;
         },
         act: (bloc) => numberTriviaBloc.add(const GetTriviaForConcreteNumberEvent(numberString)),
