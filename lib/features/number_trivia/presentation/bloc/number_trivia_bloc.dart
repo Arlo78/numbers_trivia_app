@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:numbers_trivia_app/core/error/failures.dart';
+import 'package:numbers_trivia_app/core/usecases/usecase.dart';
 import 'package:numbers_trivia_app/core/util/input_converter.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
@@ -23,6 +24,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     required this.inputConverter,
   }) : super(Empty()) {
     on<GetTriviaForConcreteNumberEvent>(_getConcreteNumberTrivia);
+    on<GetTriviaForRandomNumberEvent>(_getRandomNumberTrivia);
   }
 
   NumberTriviaState get initialState => Empty();
@@ -42,6 +44,18 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
           (trivia) => emit(Loaded(trivia: trivia)),
         );
       },
+    );
+  }
+
+  Future<void> _getRandomNumberTrivia(
+    GetTriviaForRandomNumberEvent event,
+    Emitter<NumberTriviaState> emit,
+  ) async {
+    emit(Loading());
+    final failureOrTrivia = await random(const NoParams());
+    failureOrTrivia.fold(
+      (failure) => emit(Error(message: _mapFailureToMessage(failure))),
+      (trivia) => emit(Loaded(trivia: trivia)),
     );
   }
 
