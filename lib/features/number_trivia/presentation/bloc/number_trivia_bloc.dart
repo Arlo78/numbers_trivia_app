@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:numbers_trivia_app/core/error/failures.dart';
 import 'package:numbers_trivia_app/core/usecases/usecase.dart';
 import 'package:numbers_trivia_app/core/util/input_converter.dart';
+import 'package:numbers_trivia_app/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import 'package:numbers_trivia_app/features/number_trivia/presentation/bloc/bloc.dart';
@@ -39,10 +41,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       (integer) async {
         emit(Loading());
         final failureOrTrivia = await concrete(Params(number: integer));
-        failureOrTrivia.fold(
-          (failure) => emit(Error(message: _mapFailureToMessage(failure))),
-          (trivia) => emit(Loaded(trivia: trivia)),
-        );
+        _getFailureOrTrivia(failureOrTrivia, emit);
       },
     );
   }
@@ -53,7 +52,12 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   ) async {
     emit(Loading());
     final failureOrTrivia = await random(const NoParams());
-    failureOrTrivia.fold(
+    _getFailureOrTrivia(failureOrTrivia, emit);
+  }
+
+  void _getFailureOrTrivia(
+      Either<Failure, NumberTrivia> failureOrTrivia, Emitter<NumberTriviaState> emit) {
+    return failureOrTrivia.fold(
       (failure) => emit(Error(message: _mapFailureToMessage(failure))),
       (trivia) => emit(Loaded(trivia: trivia)),
     );
