@@ -1,3 +1,5 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:numbers_trivia_app/core/util/input_converter.dart';
@@ -43,5 +45,28 @@ void main() {
     const numberString = '1';
     const numberParse = 1;
     const numberTrivia = NumberTrivia(text: 'test', number: 1);
+
+    blocTest<NumberTriviaBloc, NumberTriviaState>(
+        'should call the InputConverter to validate and convert the string to an unsigned integer',
+        build: () {
+          when(() => mockInputConverter.stringToUnsignedInteger(numberString))
+              .thenReturn(const Right(numberParse));
+          return numberTriviaBloc;
+        },
+        act: (bloc) => numberTriviaBloc.add(const GetTriviaForConcreteNumberEvent(numberString)),
+        expect: () => <NumberTriviaState>[],
+        verify: (_) {
+          verify(() => mockInputConverter.stringToUnsignedInteger(numberString)).called(1);
+        });
+
+    blocTest<NumberTriviaBloc, NumberTriviaState>('should emit [Error] when the input is invalid',
+        build: () {
+          when(() => mockInputConverter.stringToUnsignedInteger(numberString))
+              .thenReturn(Left(InvalidInputFailure()));
+          return numberTriviaBloc;
+        },
+        seed: () => Empty(),
+        act: (bloc) => numberTriviaBloc.add(const GetTriviaForConcreteNumberEvent(numberString)),
+        expect: () => <NumberTriviaState>[const Error(message: invalidInputFailureMessage)]);
   });
 }
