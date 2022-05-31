@@ -14,11 +14,17 @@ class MockGetRandomNumberTrivia extends Mock implements GetRandomNumberTrivia {}
 
 class MockInputConverter extends Mock implements InputConverter {}
 
+class FakeParams extends Fake implements Params {}
+
 void main() {
   NumberTriviaBloc numberTriviaBloc;
   MockGetConcreteNumberTrivia mockGetConcreteNumberTrivia;
   MockGetRandomNumberTrivia mockGetRandomNumberTrivia;
   MockInputConverter mockInputConverter;
+
+  setUpAll(() {
+    registerFallbackValue(FakeParams());
+  });
 
   test('initialState should be Empty', () {
     mockGetConcreteNumberTrivia = MockGetConcreteNumberTrivia();
@@ -84,5 +90,27 @@ void main() {
         seed: () => Empty(),
         act: (bloc) => numberTriviaBloc.add(const GetTriviaForConcreteNumberEvent(numberString)),
         expect: () => <NumberTriviaState>[const Error(message: invalidInputFailureMessage)]);
+
+    blocTest<NumberTriviaBloc, NumberTriviaState>(
+      'should get data from the concrete use case',
+      build: () {
+        mockGetConcreteNumberTrivia = MockGetConcreteNumberTrivia();
+        mockGetRandomNumberTrivia = MockGetRandomNumberTrivia();
+        mockInputConverter = MockInputConverter();
+        numberTriviaBloc = NumberTriviaBloc(
+          concrete: mockGetConcreteNumberTrivia,
+          random: mockGetRandomNumberTrivia,
+          inputConverter: mockInputConverter,
+        );
+        when(() => mockInputConverter.stringToUnsignedInteger(numberString))
+            .thenReturn(const Right(numberParse));
+        when(() => mockGetConcreteNumberTrivia(any()))
+            .thenAnswer((_) async => const Right(numberTrivia));
+        return numberTriviaBloc;
+      },
+      seed: () => Empty(),
+      act: (bloc) => numberTriviaBloc.add(const GetTriviaForConcreteNumberEvent(numberString)),
+      verify: (_) => mockGetConcreteNumberTrivia(const Params(number: numberParse)),
+    );
   });
 }

@@ -35,7 +35,9 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       (failure) => emit(const Error(
         message: invalidInputFailureMessage,
       )),
-      (integer) => throw UnimplementedError(),
+      (integer) {
+        concrete(Params(number: integer));
+      },
     );
   }
 }
