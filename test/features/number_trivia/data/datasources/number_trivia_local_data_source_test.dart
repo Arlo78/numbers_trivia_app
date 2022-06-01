@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:numbers_trivia_app/core/error/exceptions.dart';
+import 'package:numbers_trivia_app/core/util/constants.dart';
 import 'package:numbers_trivia_app/features/number_trivia/data/datasources/number_trivia_local_data_source.dart';
 import 'package:numbers_trivia_app/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,6 +56,7 @@ void main() {
         final expectedJsonString = json.encode(numberTriviaModel.toJson());
         when(() => mockSharedPreferences.setString(cachedNumberTrivia, expectedJsonString))
             .thenAnswer((_) => Future.value(true));
+
         numberTriviaLocalDataSourceImpl.cacheNumberTrivia(numberTriviaModel);
 
         verify(() => mockSharedPreferences.setString(cachedNumberTrivia, expectedJsonString));

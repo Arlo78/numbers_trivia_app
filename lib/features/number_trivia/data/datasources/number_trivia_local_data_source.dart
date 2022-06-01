@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:numbers_trivia_app/core/error/exceptions.dart';
+import 'package:numbers_trivia_app/core/util/constants.dart';
 import 'package:numbers_trivia_app/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-const cachedNumberTrivia = 'CACHED_NUMBER_TRIVIA';
 
 abstract class NumberTriviaLocalDataSource {
   Future<NumberTriviaModel> getLastNumberTrivia();
