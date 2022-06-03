@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({Key? key}) : super(key: key);
@@ -9,7 +10,10 @@ class LoadingWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 3,
       child: const Center(
         child: SingleChildScrollView(
-          child: CircularProgressIndicator(),
+          child: SpinKitFadingFour(
+            color: Colors.purple,
+            size: 50.0,
+          ),
         ),
       ),
     );

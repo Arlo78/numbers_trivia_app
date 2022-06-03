@@ -24,8 +24,9 @@ class _TriviaControlsState extends State<TriviaControls> {
           controller: controller,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
-            border: OutlineInputBorder(),
+            border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
             hintText: 'Input a number',
+            hintStyle: TextStyle(color: Colors.black54),
           ),
           onChanged: (value) {
             inputString = value;
@@ -38,6 +39,12 @@ class _TriviaControlsState extends State<TriviaControls> {
           children: [
             Expanded(
               child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                      side: const BorderSide(color: Colors.deepOrange))),
+                  backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+                ),
                 onPressed: dispatchConcrete,
                 child: const Text('Search'),
               ),
@@ -47,6 +54,12 @@ class _TriviaControlsState extends State<TriviaControls> {
             ),
             Expanded(
               child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                      side: const BorderSide(color: Colors.deepOrange))),
+                  backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+                ),
                 onPressed: dispatchRandom,
                 child: const Text('Get random trivia'),
               ),

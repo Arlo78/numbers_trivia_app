@@ -16,7 +16,8 @@ class MessageDisplay extends StatelessWidget {
           child: Text(
             message,
             style: const TextStyle(
-              fontSize: 25,
+              color: Colors.black54,
+              fontSize: 20,
             ),
             textAlign: TextAlign.center,
           ),

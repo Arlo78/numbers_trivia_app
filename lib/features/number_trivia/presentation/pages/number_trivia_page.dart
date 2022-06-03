@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:numbers_trivia_app/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import 'package:numbers_trivia_app/features/number_trivia/presentation/bloc/number_trivia_state.dart';
@@ -15,6 +16,13 @@ class NumberTriviaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.deepOrange,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+        ),
+        backgroundColor: Colors.deepOrange,
+        centerTitle: true,
         title: const Text('Number Trivia'),
       ),
       body: BlocProvider(
@@ -25,7 +33,7 @@ class NumberTriviaPage extends StatelessWidget {
   Center _buildBody(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             const SizedBox(
