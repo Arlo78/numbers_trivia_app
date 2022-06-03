@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class MessageDisplay extends StatelessWidget {
   final String message;
   const MessageDisplay({
