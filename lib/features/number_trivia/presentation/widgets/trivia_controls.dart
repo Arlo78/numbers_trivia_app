@@ -36,16 +36,6 @@ class _TriviaControlsState extends State<TriviaControls> {
           height: 10,
         ),
         _buildNumberTriviaButtons(),
-        const Padding(
-          padding: EdgeInsets.all(20),
-          child: SizedBox(
-            height: 20,
-            child: Text(
-              'Or try',
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-        ),
         _buildExtraTriviaButtons(),
       ],
     );
