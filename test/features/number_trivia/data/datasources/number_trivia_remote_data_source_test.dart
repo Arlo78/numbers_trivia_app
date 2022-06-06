@@ -178,4 +178,56 @@ void main() {
       },
     );
   });
+
+  group('getRandomDateTrivia', () {
+    final tNumberTriviaModel = NumberTriviaModel.fromJson(json.decode(fixture('trivia.json')));
+
+    test(
+      'should perform a GET request on a URL with number being the endpoint '
+      'and with application/json header',
+      () async {
+        mockHttpClient = MockHttpClient();
+        dataSource = NumberTriviaRemoteDataSourceImpl(httpClient: mockHttpClient);
+        when(() => mockHttpClient.get(any(), headers: any(named: 'headers')))
+            .thenAnswer((_) async => http.Response(fixture('trivia.json'), 200));
+
+        dataSource.getRandomDateTrivia();
+
+        verify(() => mockHttpClient.get(
+              Uri.parse('http://numbersapi.com/random/date'),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            ));
+      },
+    );
+
+    test(
+      'should return NumberTrivia when the response code is 200',
+      () async {
+        mockHttpClient = MockHttpClient();
+        dataSource = NumberTriviaRemoteDataSourceImpl(httpClient: mockHttpClient);
+        when(() => mockHttpClient.get(any(), headers: any(named: 'headers')))
+            .thenAnswer((_) async => http.Response(fixture('trivia.json'), 200));
+
+        final result = await dataSource.getRandomDateTrivia();
+
+        expect(result, equals(tNumberTriviaModel));
+      },
+    );
+
+    test(
+      'should throw a ServerException when the response code is 404 or other',
+      () async {
+        mockHttpClient = MockHttpClient();
+        dataSource = NumberTriviaRemoteDataSourceImpl(httpClient: mockHttpClient);
+        when(() => mockHttpClient.get(any(), headers: any(named: 'headers')))
+            .thenAnswer((_) async => http.Response('Something went wrong', 404));
+
+        final call = dataSource.getRandomDateTrivia;
+
+        expect(() => call(), throwsA(isA<ServerException>()));
+      },
+    );
+  });
 }

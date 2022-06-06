@@ -8,6 +8,7 @@ abstract class NumberTriviaRemoteDataSource {
   Future<NumberTriviaModel> getConcreteNumberTrivia(int number);
   Future<NumberTriviaModel> getRandomNumberTrivia();
   Future<NumberTriviaModel> getRandomYearTrivia();
+  Future<NumberTriviaModel> getRandomDateTrivia();
 }
 
 class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
@@ -26,6 +27,10 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   @override
   Future<NumberTriviaModel> getRandomYearTrivia() =>
       _getTriviaFromUrl('http://numbersapi.com/random/year');
+
+  @override
+  Future<NumberTriviaModel> getRandomDateTrivia() =>
+      _getTriviaFromUrl('http://numbersapi.com/random/date');
 
   Future<NumberTriviaModel> _getTriviaFromUrl(String url) async {
     final response = await httpClient.get(
