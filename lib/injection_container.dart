@@ -11,6 +11,7 @@ import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_ra
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/number_trivia/data/datasources/number_trivia_local_data_source.dart';
+import 'features/number_trivia/domain/usecases/get_random_year_trivia.dart';
 import 'features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 
 final serviceLocator = GetIt.instance;
@@ -22,6 +23,7 @@ Future<void> init() async {
       inputConverter: serviceLocator(),
       concrete: serviceLocator(),
       random: serviceLocator(),
+      year: serviceLocator(),
     ),
   );
 
@@ -29,6 +31,8 @@ Future<void> init() async {
   serviceLocator.registerLazySingleton(() => GetConcreteNumberTrivia(serviceLocator()));
 
   serviceLocator.registerLazySingleton(() => GetRandomNumberTrivia(serviceLocator()));
+
+  serviceLocator.registerLazySingleton(() => GetRandomYearTrivia(serviceLocator()));
 
   //Repository
   serviceLocator.registerLazySingleton<NumberTriviaRepository>(
