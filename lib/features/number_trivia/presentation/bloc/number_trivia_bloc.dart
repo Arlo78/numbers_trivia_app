@@ -7,21 +7,25 @@ import 'package:numbers_trivia_app/core/util/input_converter.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
+import 'package:numbers_trivia_app/features/number_trivia/domain/usecases/get_random_year_trivia.dart';
 import 'package:numbers_trivia_app/features/number_trivia/presentation/bloc/number_trivia_event.dart';
 import 'package:numbers_trivia_app/features/number_trivia/presentation/bloc/number_trivia_state.dart';
 
 class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   final GetConcreteNumberTrivia concrete;
   final GetRandomNumberTrivia random;
+  final GetRandomYearTrivia year;
   final InputConverter inputConverter;
 
   NumberTriviaBloc({
     required this.concrete,
     required this.random,
+    required this.year,
     required this.inputConverter,
   }) : super(Empty()) {
     on<GetTriviaForConcreteNumberEvent>(_getConcreteNumberTrivia);
     on<GetTriviaForRandomNumberEvent>(_getRandomNumberTrivia);
+    on<GetTriviaForRandomYearEvent>(_getRandomYearTrivia);
   }
 
   NumberTriviaState get initialState => Empty();
@@ -47,6 +51,15 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   ) async {
     emit(Loading());
     final failureOrTrivia = await random(const NoParams());
+    _getFailureOrTrivia(failureOrTrivia, emit);
+  }
+
+  Future<void> _getRandomYearTrivia(
+    GetTriviaForRandomYearEvent event,
+    Emitter<NumberTriviaState> emit,
+  ) async {
+    emit(Loading());
+    final failureOrTrivia = await year(const NoParams());
     _getFailureOrTrivia(failureOrTrivia, emit);
   }
 
