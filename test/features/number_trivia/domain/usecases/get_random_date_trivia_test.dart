@@ -13,7 +13,7 @@ void main() {
   MockNumberTriviaRepository mockNumberTriviaRepository;
 
   test('should get random date trivia from the repository ', () async {
-    const randomDateTrivia = NumberTrivia(number: 1, text: 'test');
+    const randomDateTrivia = NumberTrivia(number: 1, text: 'test', year: 1900);
     mockNumberTriviaRepository = MockNumberTriviaRepository();
     usecase = GetRandomDateTrivia(mockNumberTriviaRepository);
 

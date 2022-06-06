@@ -7,7 +7,7 @@ import 'package:numbers_trivia_app/features/number_trivia/domain/entities/number
 import '../../../../core/fixtures/fixture_reader.dart';
 
 void main() {
-  const numberTriviaModel = NumberTriviaModel(number: 1, text: 'test');
+  const numberTriviaModel = NumberTriviaModel(number: 1, text: 'test', year: 0);
 
   test('should be a subclass of NumberTrivia entity', () async {
     expect(numberTriviaModel, isA<NumberTrivia>());
@@ -38,6 +38,7 @@ void main() {
       final expectedMap = {
         "text": "test",
         "number": 1.0,
+        "year": 0,
       };
 
       expect(result, expectedMap);

@@ -14,7 +14,7 @@ class TriviaControls extends StatefulWidget {
 
 class _TriviaControlsState extends State<TriviaControls> {
   final controller = TextEditingController();
-  late String inputString;
+  String inputString = '';
 
   @override
   Widget build(BuildContext context) {

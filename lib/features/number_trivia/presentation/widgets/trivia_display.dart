@@ -15,7 +15,7 @@ class TriviaDisplay extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            trivia.number.toString(),
+            _buildTextInfo(),
             style: const TextStyle(
               fontSize: 50,
               fontWeight: FontWeight.bold,
@@ -38,4 +38,6 @@ class TriviaDisplay extends StatelessWidget {
       ),
     );
   }
+
+  String _buildTextInfo() => trivia.year != 0 ? trivia.year.toString() : trivia.number.toString();
 }
