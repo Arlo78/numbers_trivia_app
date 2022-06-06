@@ -44,6 +44,13 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
     });
   }
 
+  @override
+  Future<Either<Failure, NumberTrivia>> getRandomDateTrivia() async {
+    return await _getTrivia(() {
+      return remoteDataSource.getRandomDateTrivia();
+    });
+  }
+
   Future<Either<Failure, NumberTrivia>> _getTrivia(
     _ConcreteOrRandomChooser getConcreteOrRandom,
   ) async {
