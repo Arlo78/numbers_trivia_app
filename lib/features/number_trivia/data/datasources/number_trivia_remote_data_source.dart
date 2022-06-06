@@ -7,6 +7,7 @@ import 'package:numbers_trivia_app/features/number_trivia/data/models/number_tri
 abstract class NumberTriviaRemoteDataSource {
   Future<NumberTriviaModel> getConcreteNumberTrivia(int number);
   Future<NumberTriviaModel> getRandomNumberTrivia();
+  Future<NumberTriviaModel> getRandomYearTrivia();
 }
 
 class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
@@ -21,6 +22,10 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   @override
   Future<NumberTriviaModel> getRandomNumberTrivia() =>
       _getTriviaFromUrl('http://numbersapi.com/random');
+
+  @override
+  Future<NumberTriviaModel> getRandomYearTrivia() =>
+      _getTriviaFromUrl('http://numbersapi.com/random/year');
 
   Future<NumberTriviaModel> _getTriviaFromUrl(String url) async {
     final response = await httpClient.get(
