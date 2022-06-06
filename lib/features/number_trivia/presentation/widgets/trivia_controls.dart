@@ -35,37 +35,86 @@ class _TriviaControlsState extends State<TriviaControls> {
         const SizedBox(
           height: 10,
         ),
-        Row(
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                      side: const BorderSide(color: Colors.deepOrange))),
-                  backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
-                ),
-                onPressed: dispatchConcrete,
-                child: const Text('Search'),
-              ),
+        _buildNumberTriviaButtons(),
+        const Padding(
+          padding: EdgeInsets.all(20),
+          child: SizedBox(
+            height: 20,
+            child: Text(
+              'Or try',
+              style: TextStyle(fontSize: 16),
             ),
-            const SizedBox(
-              width: 10,
+          ),
+        ),
+        _buildExtraTriviaButtons(),
+      ],
+    );
+  }
+
+  Row _buildExtraTriviaButtons() {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                  side: const BorderSide(color: Colors.deepOrange))),
+              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
             ),
-            Expanded(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                      side: const BorderSide(color: Colors.deepOrange))),
-                  backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
-                ),
-                onPressed: dispatchRandom,
-                child: const Text('Get random trivia'),
-              ),
+            onPressed: () {},
+            child: const Text('Get random date'),
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                  side: const BorderSide(color: Colors.deepOrange))),
+              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
             ),
-          ],
-        )
+            onPressed: dispatchRandomYear,
+            child: const Text('Get random year'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row _buildNumberTriviaButtons() {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                  side: const BorderSide(color: Colors.deepOrange))),
+              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+            ),
+            onPressed: dispatchConcrete,
+            child: const Text('Search'),
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                  side: const BorderSide(color: Colors.deepOrange))),
+              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+            ),
+            onPressed: dispatchRandom,
+            child: const Text('Get random trivia'),
+          ),
+        ),
       ],
     );
   }
@@ -77,5 +126,9 @@ class _TriviaControlsState extends State<TriviaControls> {
 
   void dispatchRandom() {
     BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomNumberEvent());
+  }
+
+  void dispatchRandomYear() {
+    BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomYearEvent());
   }
 }
