@@ -22,3 +22,8 @@ class GetTriviaForRandomYearEvent extends NumberTriviaEvent {
   @override
   List<Object?> get props => [];
 }
+
+class GetTriviaForRandomDateEvent extends NumberTriviaEvent {
+  @override
+  List<Object?> get props => [];
+}
