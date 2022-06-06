@@ -62,7 +62,7 @@ class _TriviaControlsState extends State<TriviaControls> {
                   side: const BorderSide(color: Colors.deepOrange))),
               backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
             ),
-            onPressed: () {},
+            onPressed: dispatchRandomDate,
             child: const Text('Get random date'),
           ),
         ),
@@ -130,5 +130,9 @@ class _TriviaControlsState extends State<TriviaControls> {
 
   void dispatchRandomYear() {
     BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomYearEvent());
+  }
+
+  void dispatchRandomDate() {
+    BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomDateEvent());
   }
 }
