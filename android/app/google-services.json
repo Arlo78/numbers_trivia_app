@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1007968606448",
+    "project_id": "number-trivia-app",
+    "storage_bucket": "number-trivia-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007968606448:android:b122e6327f2d0c10e54a35",
+        "android_client_info": {
+          "package_name": "com.example.numbers_trivia_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007968606448-65mbe97vce34qtlfb36et8lt2e78g8sm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC-QW4VtXOemwPjUaAV8YKW4otsYFPQqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007968606448-65mbe97vce34qtlfb36et8lt2e78g8sm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
