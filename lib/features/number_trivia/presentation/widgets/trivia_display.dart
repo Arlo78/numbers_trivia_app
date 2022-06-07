@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:numbers_trivia_app/features/number_trivia/domain/entities/number_trivia.dart';
 
 class TriviaDisplay extends StatelessWidget {
@@ -14,11 +15,23 @@ class TriviaDisplay extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 3,
       child: Column(
         children: [
-          Text(
-            _buildTextInfo(),
-            style: const TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.bold,
+          const SizedBox(
+            height: 20,
+          ),
+          ClipPath(
+            clipper: OvalBottomBorderClipper(),
+            child: Container(
+              height: 100,
+              color: Colors.amber,
+              child: Center(
+                child: Text(
+                  _buildTextInfo(),
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
           Expanded(

@@ -17,11 +17,11 @@ class NumberTriviaPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.deepOrange,
+          statusBarColor: Colors.green,
           statusBarIconBrightness: Brightness.dark,
           statusBarBrightness: Brightness.light,
         ),
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Colors.green,
         centerTitle: true,
         title: const Text('Number Trivia'),
       ),
@@ -33,37 +33,36 @@ class NumberTriviaPage extends StatelessWidget {
   Center _buildBody(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
-              builder: (BuildContext context, state) {
-                if (state is Empty) {
-                  return const MessageDisplay(
-                    message: 'Start searching!',
-                  );
-                } else if (state is Loading) {
-                  return const LoadingWidget();
-                } else if (state is Loaded) {
-                  return TriviaDisplay(trivia: state.trivia);
-                } else if (state is Error) {
-                  return MessageDisplay(
-                    message: state.message,
-                  );
-                }
-                return Container();
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const TriviaControls(),
-          ],
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
+                builder: (BuildContext context, state) {
+                  if (state is Empty) {
+                    return const MessageDisplay(
+                      message: 'Start searching!',
+                    );
+                  } else if (state is Loading) {
+                    return const LoadingWidget();
+                  } else if (state is Loaded) {
+                    return TriviaDisplay(trivia: state.trivia);
+                  } else if (state is Error) {
+                    return MessageDisplay(
+                      message: state.message,
+                    );
+                  }
+                  return Container();
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const TriviaControls(),
+            ],
+          )),
     );
   }
 }

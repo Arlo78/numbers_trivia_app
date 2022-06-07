@@ -49,8 +49,8 @@ class _TriviaControlsState extends State<TriviaControls> {
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
-                  side: const BorderSide(color: Colors.deepOrange))),
-              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+                  side: const BorderSide(color: Colors.green))),
+              backgroundColor: MaterialStateProperty.all(Colors.green),
             ),
             onPressed: dispatchRandomDate,
             child: const Text('Get random date'),
@@ -64,8 +64,8 @@ class _TriviaControlsState extends State<TriviaControls> {
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
-                  side: const BorderSide(color: Colors.deepOrange))),
-              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+                  side: const BorderSide(color: Colors.green))),
+              backgroundColor: MaterialStateProperty.all(Colors.green),
             ),
             onPressed: dispatchRandomYear,
             child: const Text('Get random year'),
@@ -83,8 +83,8 @@ class _TriviaControlsState extends State<TriviaControls> {
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
-                  side: const BorderSide(color: Colors.deepOrange))),
-              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+                  side: const BorderSide(color: Colors.green))),
+              backgroundColor: MaterialStateProperty.all(Colors.green),
             ),
             onPressed: dispatchConcrete,
             child: const Text('Search'),
@@ -98,8 +98,8 @@ class _TriviaControlsState extends State<TriviaControls> {
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
-                  side: const BorderSide(color: Colors.deepOrange))),
-              backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+                  side: const BorderSide(color: Colors.green))),
+              backgroundColor: MaterialStateProperty.all(Colors.green),
             ),
             onPressed: dispatchRandom,
             child: const Text('Get random trivia'),
