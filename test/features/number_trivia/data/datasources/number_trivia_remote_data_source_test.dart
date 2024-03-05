@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
-import 'package:matcher/matcher.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:numbers_trivia_app/core/error/exceptions.dart';
 import 'package:numbers_trivia_app/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart';
